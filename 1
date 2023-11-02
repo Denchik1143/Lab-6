@@ -1,0 +1,13 @@
+function addImageToEveryPage() {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  var paragraphs = body.getParagraphs();
+  var logoUrl = 'https://www.rv-it.college/images/banners/logo_IT_short_white.png'; 
+  for (var i = 0; i < paragraphs.length; i++) {
+    var paragraph = paragraphs[i];
+    if (paragraph.isAtEndOfSection()) {
+      var logoBlob = UrlFetchApp.fetch(logoUrl).getBlob();
+      paragraph.appendInlineImage(logoBlob).setWidth(100).setHeight(100);
+    }
+  }
+}
