@@ -1,0 +1,18 @@
+function copyAndReplaceAuthor(originalAuthor, newAuthor) {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  
+  // Створення копії документа
+  var file = DriveApp.getFileById(doc.getId());
+  var newFile = file.makeCopy();
+  
+  // Відкриття копії документа
+  var newDoc = DocumentApp.openById(newFile.getId());
+  var newBody = newDoc.getBody();
+  
+  // Заміна ПІБ автора
+  newBody.replaceText(originalAuthor, newAuthor);
+  
+  // Збереження змін
+  newDoc.saveAndClose();
+}
