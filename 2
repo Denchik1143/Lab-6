@@ -1,0 +1,10 @@
+function replacePlaceholders() {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  
+  var fullName = 'Юхимчук_Денис';
+  var birthDate = '08_02_2005';
+  
+  body.replaceText('ПІБ_ПЛЕЙСХОЛДЕР', fullName);
+  body.replaceText('ДАТА_НАРОДЖЕННЯ_ПЛЕЙСХОЛДЕР', birthDate);
+}
