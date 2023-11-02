@@ -1,0 +1,22 @@
+function replaceUrlsWithHyperlinks() {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  var text = body.editAsText();
+  
+  var urlRegex = /https?:\/\/[^\s]+/g;
+  var urls = text.getText().match(urlRegex);
+  
+  if (urls) {
+    for (var i = 0; i < urls.length; i++) {
+      var url = urls[i];
+      
+      var response = UrlFetchApp.fetch(url);
+      var titleRegex = /<title>(.*?)<\/title>/i;
+      var titleMatches = response.getContentText().match(titleRegex);
+      var title = titleMatches ? titleMatches[1] : url;
+      
+      text.replaceText(url, '');
+      body.appendParagraph(title).setLinkUrl(url);
+    }
+  }
+}
